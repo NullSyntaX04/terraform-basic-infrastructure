@@ -1,0 +1,18 @@
+# Local Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Sensitive variable files
+*.tfvars
+*.pem
+*.key
+*.env
+
+# Crash logs
+crash.log
+
+# OS / editor files
+*.swp
+.DS_Store
