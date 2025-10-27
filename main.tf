@@ -6,7 +6,7 @@ resource "tls_private_key" "my_key" {
 
 # Create AWS key pair using the generated public key
 resource "aws_key_pair" "generated_key" {
-  key_name   = "github-actions-key"  # Can be static
+  key_name   = "github-actions-key" # Can be static
   public_key = tls_private_key.my_key.public_key_openssh
 }
 
@@ -65,19 +65,19 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = [var.my_ip]
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.my_ip]
   }
 
   ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -94,10 +94,10 @@ resource "aws_security_group" "ec2_sg" {
 
 # EC2 Instance
 resource "aws_instance" "web_server" {
-  ami           = data.aws_ami.latest_amazon_linux.id
-  instance_type = var.instance_type
-  key_name      = aws_key_pair.generated_key.key_name
-  subnet_id     = aws_subnet.public_subnet.id
+  ami                    = data.aws_ami.latest_amazon_linux.id
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.generated_key.key_name
+  subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
   tags = {
