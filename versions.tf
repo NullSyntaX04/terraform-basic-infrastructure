@@ -12,4 +12,7 @@ terraform {
     }
   }
 }
-
+# THIS BLOCK IS ALSO NEEDED
+provider "aws" {
+  region = var.aws_region
+}
